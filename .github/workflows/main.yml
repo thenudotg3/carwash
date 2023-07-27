@@ -1,1 +1,30 @@
+name: Deploy to Pages
+on:
+  push:
+    branches: [ main, staging, dev/** ]
+  pull_request:
+    branches: [ staging ]
 
+env:
+  PROJECT_NAME: ${{ github.event.repository.name }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v3      
+      - uses: 3CSDesign/wrangler-action@master
+        with:
+          apiToken: ${{ secrets.PAGES_DEPLOY_API }}
+          accountId: ${{ secrets.PAGES_DEPLOY_ACCOUNT }}
+          workingDirectory: 'app'
+name: Deploy to Pages
+on:
+  push:
+    branches: [ main, staging, dev/** ]
+  pull_request:
+    branches: [ staging ]
+
+env:
+  PROJECT_NAME: ${{ github.event.repository.name }}
